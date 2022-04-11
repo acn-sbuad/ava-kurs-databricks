@@ -114,7 +114,10 @@ In this task, we will be setting up the cluster.
 
 ## Task 5 - Upload testdata
  
-[Airbnb data](listings.csv.gz) Download this file, and upload it to Databricks.
+[Airbnb data](listings.csv.gz)
+
+Donwload the data from Airbnb, and upload it to Databricks by following these instructions. 
+
 
 ## Task 6 - Set up workflow for running unit tests
 Should give student an overview of what is failing and status quoe. 
