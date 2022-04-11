@@ -38,8 +38,6 @@ Fork [the repository](https://github.com/acn-sbuad/ava-kurs-databricks) to your 
     - _Workspace name_: `ava-kurs-ws`
     - _Region_: `North Europe`
     - _Pricing Tier_: `Standard`
-    - [Insert instructions on the memory and GB here]
-
 
  6. Click _Review and Create_
 
@@ -56,7 +54,7 @@ Let's move on to the next task, and get back to this once it's ready.
 
     !["Navigation to token generation"](imgs/generate-new-token.jpg)
 
-2. Select __repo__ as the scope. The token will be applicable for all the specified actions in your repositories.
+2. Add `Databrocks` in Note, and select __repo__ as the scope. The token will be applicable for all the specified actions in your repositories.
 
     !["Configure token"](imgs/configure-token.jpg)
 
@@ -74,6 +72,30 @@ Let's move on to the next task, and get back to this once it's ready.
  
 3. If the workspace is fully provisioned, you should see the page below. Click `Launch workspace`
     !["Launch workspace page"](imgs/launch-workspace.png)
+
+4. You are now redirected to Databricks and presented with the menu
+    !["Databricks menu"](imgs/databricks-menu.png)
+
+5. Select __Settings__ , click __User Settings__ and navigate to the __Git integrations__ tab.
+
+6. Configure the personal access token
+    - __Git Provider__: GitHub
+    - __Git provider username or email__: Add your GitHub username
+    - __Token__ Copy the personal access token you generated in GitHub.
+
+    Click `Save`
+
+7. Back in the menu select __Repos__ in the menu and click __Add repo__
+
+
+5. Set up the connection for your forked repository.
+
+    Add the url for the repository and select GitHub as source. 
+
+    Click __Create__
+
+    !["Repository config"](imgs/add-repo.png)
+## Task 5 - Create a cluster
 
 
 ## Task 5 - Upload testdata
