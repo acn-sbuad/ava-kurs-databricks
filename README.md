@@ -26,7 +26,7 @@ Fork [the repository](https://github.com/acn-sbuad/ava-kurs-databricks) to your 
 ## Task 4 - Upload testdata
 
 ## Task 5 - Set up workflow for running unit tests
-Whouls give student an overview of what is failing and status quoe. 
+Should give student an overview of what is failing and status quoe. 
 Helpertests running ok, all tests related to dataset cleaning should be failing
 
 
