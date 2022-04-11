@@ -1,12 +1,5 @@
 # Databricks notebook source
 # MAGIC %md-sandbox
-# MAGIC <div style="text-align: center; line-height: 0; padding-top: 9px;">
-# MAGIC   <img src="https://databricks.com/wp-content/uploads/2018/03/db-academy-rgb-1200px.png" alt="Databricks Learning" style="width: 600px; height: 163px">
-# MAGIC </div>
-
-# COMMAND ----------
-
-# MAGIC %md-sandbox
 # MAGIC #Linear Regression Lab with Airbnb
 # MAGIC 
 # MAGIC The dataset we'll be working with is from Airbnb rentals in Oslo<br>
@@ -131,9 +124,7 @@ display(airbnbDF.groupBy("room_type").count())
 
 # COMMAND ----------
 
-# TODO: Replace <FILL_IN> with appropriate code - OPTION 1
-display(<FILL_IN>) - DECIDE
-# TODO: Replace <FILL_IN> with appropriate code - OPTION 2
+# TODO: Replace <FILL_IN> with appropriate code
 display(airbnbDF.groupBy(<FILL_IN>).count().orderBy(col(<FILL_IN>).desc()))
 
 # COMMAND ----------
@@ -317,8 +308,7 @@ featureCols = [
 from pyspark.ml.feature import VectorAssembler
 from pyspark.ml.regression import LinearRegression
 
-assembler = VectorAssembler(<FILL_IN>) - DECIDE
-assembler = VectorAssembler(inputCols=<FILL_IN>, outputCol=<FILL_IN>) - DECIDE
+assembler = VectorAssembler(inputCols=<FILL_IN>, outputCol=<FILL_IN>)
 
 lr = (LinearRegression()
       .setLabelCol("price")
