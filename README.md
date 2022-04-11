@@ -2,7 +2,7 @@
 
 Welcome to this workshop for learning Databricks and GitHub Actions!
 
-For this workshop, your task is to complete a Databricks workbook for cleaning and analyzing data from AirBnB. In addition, you will be setting up workflows for testing and labeling pull requests for the source code.  
+For this workshop, your task is to complete a Databricks workbook for cleaning and analyzing data from Airbnb. In addition, you will be setting up workflows for testing and labeling pull requests for the source code.  
 
 ## Pre requisites
 
@@ -96,11 +96,25 @@ Let's move on to the next task, and get back to this once it's ready.
 
     !["Repository config"](imgs/add-repo.png)
 
+    You should see the files from the GitHub repository when you drill into the __Repos__ section.
+
+    !["Repository overview in Databricks"](imgs/successfully-added-repo.png)
 
 ## Task 5 - Create a cluster
 
+To run operations in Databricks you must have a cluster in place. 
+In this task, we will be setting up the cluster.
+
+1. In the menu in Databricks, select __Create__ and __Cluster__
+2. Set up the following configuration
+    - _Cluster name_: `ava-kurs-cluster`
+    - _Cluster mode_: `Single Node`
+    - _Databricks runtime version_: `Runtime: 10.4 LTS`
+    - _Node type_: Compute optimized, `Standard_F4`
 
 ## Task 5 - Upload testdata
+ 
+[Airbnb data](listings.csv.gz) Download this file, and upload it to Databricks.
 
 ## Task 6 - Set up workflow for running unit tests
 Should give student an overview of what is failing and status quoe. 
