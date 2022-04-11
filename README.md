@@ -88,14 +88,15 @@ Let's move on to the next task, and get back to this once it's ready.
 
 7. Back in the menu select __Repos__ in the menu and click __Add repo__
 
-
-5. Set up the connection for your forked repository.
+8. Set up the connection for your forked repository.
 
     Add the url for the repository and select GitHub as source. 
 
     Click __Create__
 
     !["Repository config"](imgs/add-repo.png)
+
+
 ## Task 5 - Create a cluster
 
 
