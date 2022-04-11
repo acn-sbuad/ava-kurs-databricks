@@ -20,6 +20,29 @@ We will be working with a repository that contains two workbooks for working on 
 Fork [the repository](https://github.com/acn-sbuad/ava-kurs-databricks) to your personal GitHub account, and let's get started! 
 
 ## Task 2 - Set up Databricks workspace
+ 
+1. Log onto the [Azure Portal](https://portal.azure.com/)
+
+2. In the search field, type _Databricks_
+
+3. Select `Azure Databricks` under _Services_
+
+    !["Illustration of a successful search in the portal"](imgs/databricks-in-portal.png)
+
+4. You are now redirected to the Databricks service. Click `Create`
+    !["Create new"](imgs/create-new.png)
+
+5. Configure the service
+    - _Subscription_: leave default opiton
+    - _Resource group_: ava-kurs-rg
+    - _Workspace name_: ava-kurs-ws
+    - _Region_: North Europe
+    - _Pricing Tier_: Standard
+
+ 6. Click _Review and Create_
+    !["Review and create button"](imgs/review-and-create.png)
+
+7. If validation is successful, click `Create`.
 
 ## Task 3 - Connect Databricks to repository
 
