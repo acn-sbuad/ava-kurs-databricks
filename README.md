@@ -112,12 +112,13 @@ In this task, we will be setting up the cluster.
     - _Databricks runtime version_: `Runtime: 10.4 LTS`
     - _Node type_: Compute optimized, `Standard_F4`
 
-## Task 5 - Upload testdata
- 
-[Airbnb data](listings.csv.gz)
+## Task 5 - Upload dataset to Databricks
 
-Donwload the data from Airbnb, and upload it to Databricks by following these instructions. 
-
+1. Download the [Airbnb data set](listings.csv) and save it to you local computer
+2. In the menu select __Data__ in the menu and click __Create table__.
+3. Drop the file into the section marked in red and __Create table with UI__
+    !["Create table with UI button"T](imgs/create-table-with-ui.png)
+4. To be continued
 
 ## Task 6 - Set up workflow for running unit tests
 Should give student an overview of what is failing and status quoe. 
