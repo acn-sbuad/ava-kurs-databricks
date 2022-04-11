@@ -1,7 +1,7 @@
-# Learning DataBricks and GitHub Actions
-Welcome to this workshop for learning DataBricks and GitHub Actions!
+# Learning Databricks and GitHub Actions
+Welcome to this workshop for learning Databricks and GitHub Actions!
 
-For this workshop, your task is to complete a DataBricks workbook for cleaning and analyzing data from AirBnB. In addition, you will be setting up workflows for testing and labeling pull requests for the source code.  
+For this workshop, your task is to complete a Databricks workbook for cleaning and analyzing data from AirBnB. In addition, you will be setting up workflows for testing and labeling pull requests for the source code.  
 
 ## Pre requisites
 
@@ -19,9 +19,9 @@ We will be working with a repository that contains two workbooks for working on 
 
 Fork [the repository](https://github.com/acn-sbuad/ava-kurs-databricks) to your personal GitHub account, and let's get started! 
 
-## Task 2 - Set up DataBricks workspace
+## Task 2 - Set up Databricks workspace
 
-## Task 3 - Connect DataBricks to repository
+## Task 3 - Connect Databricks to repository
 
 ## Task 4 - Upload testdata
 
