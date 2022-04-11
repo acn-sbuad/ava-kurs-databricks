@@ -5,15 +5,11 @@
 
 # COMMAND ----------
 
-# MAGIC %run 
-# MAGIC ./helper_functions
-
-# COMMAND ----------
-
 # Import necessary libraries
 from pyspark.sql.types import *
 from pyspark.sql.functions import *
 from pyspark.ml.feature import Imputer
+from spark_udfs import convert_price_to_clean
 
 # COMMAND ----------
 
@@ -382,4 +378,6 @@ print("Tests passed.")
 
 # COMMAND ----------
 
-cleanDF.write.mode("overwrite").format("delta").saveAsTable("AirbnbOslo")
+columnOrder = ['host_total_listings_count', 'neighbourhood_cleansed', 'property_type', 'room_type', 'accommodates', 'bedrooms', 'beds', 'minimum_nights', 'number_of_reviews', 'review_scores_rating', 'review_scores_accuracy', 'review_scores_cleanliness', 'review_scores_checkin', 'review_scores_communication', 'review_scores_location', 'review_scores_value', 'longitude', 'latitude', 'price', 'host_is_superhost', 'instant_bookable']
+
+cleanDF.select(columnOrder).write.mode("overwrite").format("delta").saveAsTable("AirbnbOslo")

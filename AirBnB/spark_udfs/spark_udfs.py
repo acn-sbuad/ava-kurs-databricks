@@ -1,4 +1,3 @@
-# Databricks notebook source
 import re
 
 def convert_price_to_clean(price: str) -> str:
