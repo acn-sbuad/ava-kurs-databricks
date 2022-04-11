@@ -1,4 +1,5 @@
 # Learning Databricks and GitHub Actions
+
 Welcome to this workshop for learning Databricks and GitHub Actions!
 
 For this workshop, your task is to complete a Databricks workbook for cleaning and analyzing data from AirBnB. In addition, you will be setting up workflows for testing and labeling pull requests for the source code.  
