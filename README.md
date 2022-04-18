@@ -130,6 +130,7 @@ Databricks allows for data from various sources such as Azure Storage and [inser
 
 ## Task 6 - Set up workflow for running unit tests
 
+[TODO]
 Should give student an overview of what is failing and status quo. 
 Helpertests running ok, all tests related to dataset cleaning should be failing
 
@@ -155,11 +156,29 @@ Good luck!
 
 ## Task 9 - Create PR with the changes to the workbook
 
-[TODO] 
-Create the PR to check if your workflow runs as expected. If not, what changes need to be made? 
+Once you're happy with the modifications you've made to the workbook. It's time to commit the changes to the Git repository.
+We will do this through a pull request (PR) so that all our created workflows will be triggered. 
+
+In Databricks, click !["Main button"](imgs/main-btn.png) in the top menu. 
+
+A dialogue window highlighting all your changes should appear. 
+!["Workbook changes"](imgs/branch-management.png)
+
+In order to create a PR we must commit the changes to a different branch. 
+
+!["New branch"](imgs/new-branch.png)
+In the box marked with red, type the name of your branch, and click `Create Branch:`.
+
+!["Branch ready to be pushed"](imgs/commit-and-push-branch.png)
+
+Add a summary of the changes and click _Commit & Push_
+
+Follow the link in the dialogue to complete the pull request in GitHub.
+
+Are your workflows being triggered and yielding the expected results? If not, what changes can you make to the workflow to make it work? 
 
 
-## Task 9 - Linear regression on data
+## Task 10 - Linear regression on data
 
 The data is now cleaned and we can finally start analyzing it.
 
