@@ -110,23 +110,60 @@ In this task, we will be setting up the cluster.
     - _Cluster name_: `ava-kurs-cluster`
     - _Cluster mode_: `Single Node`
     - _Databricks runtime version_: `Runtime: 10.4 LTS`
-    - _Node type_: Compute optimized, `Standard_F4`
+    - _Worker type_: Compute optimized, `Standard_F4`
+    
+    Leave the rest of the settings to the default value.
+3. Click Create cluster
 
 ## Task 5 - Upload dataset to Databricks
 
-1. Download the [Airbnb data set](listings.csv) and save it to you local computer
+Databricks allows for data from various sources such as Azure Storage and [insert another storage source], but for simplicity, we will be manually uploading the data to the clusters file storage. 
+
+1. Download the [Airbnb data set](listings.csv) and save it in a reasonable location
 2. In the menu select __Data__ in the menu and click __Create table__.
-3. Drop the file into the section marked in red and __Create table with UI__
-    !["Create table with UI button"T](imgs/create-table-with-ui.png)
-4. To be continued
+3. Drop the file into the section marked in red and click __Create table with UI__ (will appear once the file is uploaded)
+    !["Create table with UI button"](imgs/create-table-with-ui.png)
+4. Select the cluster you just created and click _Preview Table_
+5. Look over the table preview and click _Create Table_ 
+6. Once successfully creatd, you should be presented with a page like the one below
+    !["Result page for created table"](imgs/successfully-created-table.png)
 
 ## Task 6 - Set up workflow for running unit tests
-Should give student an overview of what is failing and status quoe. 
+
+Should give student an overview of what is failing and status quo. 
 Helpertests running ok, all tests related to dataset cleaning should be failing
 
+## Task 7 - Set up workflow for labeling PRs based on part of code
 
-## Task 7 - Clean dataset 
+[TODO]
 
-## Task 8 - Set up workflow for labeling PRs based on part of code
+
+## Task 8 - Clean dataset 
+
+We have our Airbnb data available, and we have our unit tests set up in a workflow. Let's get to cleaning the data to make it easier to work with and analyze. 
+
+You will find the task description integrated in the workbook.
+
+In Databricks, navigate to _Repos_, select the _Airbnb_ folder, 
+select the _data-cleansing_ folder and finally the `Data Cleansing Lab` workbook. 
+
+!["Screenshot of the data cleaning workbook"](imgs/cleansing-workbook.png)
+
+Simply follow the instructions in the workbook, and check back in for the next task once you've reached the end. 
+
+Good luck! 
+
+## Task 9 - Create PR with the changes to the workbook
+
+[TODO] 
+Create the PR to check if your workflow runs as expected. If not, what changes need to be made? 
+
 
 ## Task 9 - Linear regression on data
+
+The data is now cleaned and we can finally start analyzing it.
+
+In Databricks, navigate to _Repos_, select the _Airbnb_ folder, 
+select the _linear-regression_ folder and finally the `Linear Regression Lab` workbook. 
+
+Just as before, you follow the instructions in the workbook, and check back in once you've reached the end.
