@@ -188,7 +188,7 @@ area/automation:
   - '.github/**/*'
 
 area/development:
-  - 'Airbnb/*'
+  - 'AirBnB/*'
 ```
 
 The file defines three labels for the repository. Below you find a description of 
@@ -198,7 +198,7 @@ each label.
 |-----------------|-----------------------------|
 |area/test        | Covers all changes under the `Test` directory |
 |area/automation  | Covers all changes under the `.github` directory  |
-|area/development | Covers all changes under the `Airbnb` directory  |
+|area/development | Covers all changes under the `AirBnB` directory  |
 --------
 
 **Can you think of any other labels to add to the repository?**
@@ -223,6 +223,7 @@ jobs:
       with:
         repo-token: ${{ "{{ secrets.GITHUB_TOKEN " }}}}
 ```
+
 This defines an action that triggers on the event of a pull requests. 
 The key word `pull_request_target` differs from `pull_request` in that
 the workflow will run in the context of the base of the pull request, rather than the merge commit. 
@@ -314,7 +315,7 @@ We have our Airbnb data available, and we have our unit tests set up in a workfl
 
 You will find the task description integrated in the workbook.
 
-In Databricks, navigate to _Repos_, select the _Airbnb_ folder, 
+In Databricks, navigate to _Repos_, select the _AirBnB_ folder, 
 select the _data-cleansing_ folder and finally the `Data Cleansing Lab` workbook. 
 
 !["Screenshot of the data cleaning workbook"](imgs/cleansing-workbook.png)
@@ -351,7 +352,7 @@ Are your workflows being triggered and yielding the expected results? If not, wh
 
 The data is now cleaned and we can finally start analyzing it.
 
-In Databricks, navigate to _Repos_, select the _Airbnb_ folder, 
+In Databricks, navigate to _Repos_, select the _AirBnB_ folder, 
 select the _linear-regression_ folder and finally the `Linear Regression Lab` workbook. 
 
 Just as before, you follow the instructions in the workbook, and check back in once you've reached the end.
