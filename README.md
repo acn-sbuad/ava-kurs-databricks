@@ -13,14 +13,7 @@ If you don't have one, [a GitHub account can be created for free](https://github
 
 3. An [Azure student account](https://azure.microsoft.com/nb-no/free/students/)
 
-
-## Task 1 - Fork the repository to your own GitHub account
-
-We will be working with a repository that contains two workbooks and unit tests both for the notebooks and dataset. 
-
-Fork [the repository](https://github.com/acn-sbuad/ava-kurs-databricks) to your personal GitHub account, and let's get started! 
-
-## Task 2 - Set up Databricks workspace
+## Task 1 - Set up Databricks workspace
  
 1. Log onto the [Azure Portal](https://portal.azure.com/)
 
@@ -48,6 +41,13 @@ Fork [the repository](https://github.com/acn-sbuad/ava-kurs-databricks) to your 
 
 This takes a couple of minutes. 
 Let's move on to the next task, and get back to this once it's ready.
+
+
+## Task 2 - Fork the repository to your own GitHub account
+
+We will be working with a repository that contains two workbooks and unit tests both for the notebooks and dataset. 
+
+Fork [the repository](https://github.com/acn-sbuad/ava-kurs-databricks) to your personal GitHub account, and let's get started! 
 
 ## Task 3 - Generate a personal access token for GitHub
 
@@ -121,12 +121,7 @@ Databricks allows for data from various sources such as Azure Storage and [inser
 
 1. Download the [Airbnb data set](listings.csv) and save it in a reasonable location
 2. In the menu select __Data__ in the menu and click __Create table__.
-3. Drop the file into the section marked in red and click __Create table with UI__ (will appear once the file is uploaded)
-    !["Create table with UI button"](imgs/create-table-with-ui.png)
-4. Select the cluster you just created and click _Preview Table_
-5. Look over the table preview and click _Create Table_ 
-6. Once successfully creatd, you should be presented with a page like the one below
-    !["Result page for created table"](imgs/successfully-created-table.png)
+3. Drop the file into the section _Drop files to upload, or click to browse_
 
 ## Task 6 - Set up workflow for running unit tests
 
