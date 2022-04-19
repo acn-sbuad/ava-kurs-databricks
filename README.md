@@ -182,13 +182,14 @@ and copy the content below.
 
 ```yml
 area/test:
-  - 'Test/*'
+  - 'Test/**/*'
+  - 'Test/**/**/*'
 
 area/automation:
   - '.github/**/*'
 
 area/development:
-  - 'AirBnB/*'
+  - 'AirBnB/**/*'
 ```
 
 The file defines three labels for the repository. Below you find a description of 
@@ -245,61 +246,13 @@ Find the correct action to insert from [Github Marketplace for Actions](https://
 
 ### Step 5 - Create a PR to test the new workflow
 
-In GitHub, navigate to `SampleFunctionApp.Test\FunctionsTest.cs`.
+In GitHub, navigate to `Test/data-cleansing/airbnb_test.py`.
 
 Enable editing of the file by clicking the pencil icon
 
   ![Example of issue labeling in repository](imgs/edit-file-github.png)
 
-Copy the code block below into the file.
-```cs
-[Fact]
- public async void HttpTriggerWithParams2()
- {
-     var request = TestFactory.CreateHttpRequest("name", "Nancy");
-     var response = (OkObjectResult)await Function1.Run(request, logger);
-     Assert.Equal("Hello Nancy! Welcome to Azure Functions!", response.Value);
- }
-```
-
-Your file should look like this after adding the new test.
-
-```cs
-// omitted using statements
-
-namespace SampleFunctionApp.Test
-{
-    public class Function1Test
-    {
-        private readonly ILogger logger = NullLoggerFactory.Instance.CreateLogger("Null Logger");
-
-        [Fact]
-        public async void HttpTriggerWithParams()
-        {
-            var request = TestFactory.CreateHttpRequest("name", "Bill");
-            var response = (OkObjectResult)await Function1.Run(request, logger);
-            Assert.Equal("Hello Bill! Welcome to Azure Functions!", response.Value);
-        }
-           
-        [Fact]
-         public async void HttpTriggerWithParams2()
-         {
-             var request = TestFactory.CreateHttpRequest("name", "Nancy");
-             var response = (OkObjectResult)await Function1.Run(request, logger);
-             Assert.Equal("Hello Nancy! Welcome to Azure Functions!", response.Value);
-         }
-        
-        [Fact]
-        public async void HttpTriggerWithoutParams()
-        {
-            var request = TestFactory.CreateHttpRequest("", "");
-            var response = (OkObjectResult)await Function1.Run(request, logger);
-            Assert.Equal("Hello there! Welcome to Azure Functions!", response.Value);
-        }
-    }
-}
-
-```
+Add a line break to one of the lines in the file e.g. after a comment. 
 
 Make sure to give the change a descriptive name, select the `create a new branch`
 option and complete the pull request creation.
@@ -308,6 +261,7 @@ option and complete the pull request creation.
 
 Once the PR is create, follow the workflow run from the `Actions` tab in GitHub, and confirm that the PR is successfully labeled.
 
+  ![Successfully labeled pull request](imgs/labeled-pr.png)
 
 ## Task 9 - Clean dataset 
 
