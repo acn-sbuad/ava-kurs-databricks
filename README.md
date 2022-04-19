@@ -197,7 +197,6 @@ each label.
 
 |Label            |Description                  |
 |-----------------|-----------------------------|
-
 |area/test        | Covers all changes under the `Test` directory |
 |area/automation  | Covers all changes under the `.github` directory  |
 |area/development | Covers all changes under the `AirBnB` directory  |
