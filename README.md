@@ -112,8 +112,10 @@ In this task, we will be setting up the cluster.
     - _Databricks runtime version_: `Runtime: 10.4 LTS`
     - _Worker type_: Compute optimized, `Standard_F4`
     
+3. Open __Advanced Options___ at the bottom of the page. In the section ___Environment variables___ add GITHUB_TOKEN=your github token that you saved in a notepad
+    
     Leave the rest of the settings to the default value.
-3. Click Create cluster
+4. Click Create cluster
 
 ## Task 5 - Upload dataset to Databricks
 
