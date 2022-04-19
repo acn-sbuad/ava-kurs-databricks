@@ -40,14 +40,16 @@ If you don't have one, [a GitHub account can be created for free](https://github
 7. If validation is successful, click `Create`.
 
 This takes a couple of minutes. 
+
 Let's move on to the next task, and get back to this once it's ready.
 
 
 ## Task 2 - Fork the repository to your own GitHub account
 
-We will be working with a repository that contains two workbooks and unit tests both for the notebooks and dataset. 
+We will be working with a repository that contains two Databricks workbooks and unit tests both for the notebooks and dataset. 
 
 Fork [the repository](https://github.com/acn-sbuad/ava-kurs-databricks) to your personal GitHub account, and let's get started! 
+
 
 ## Task 3 - Generate a personal access token for GitHub
 
@@ -64,6 +66,7 @@ Fork [the repository](https://github.com/acn-sbuad/ava-kurs-databricks) to your 
     !["Successfully created token page"](imgs/ready-token.jpg)
 
 4. Copy the token value to _Notepad_ or a similar text editor for safe keeping. We will be using it in a later step.
+
 
 ## Task 4 - Connect Databricks to GitHub repository
 
@@ -117,7 +120,7 @@ In this task, we will be setting up the cluster.
     Leave the rest of the settings to the default value.
 4. Click Create cluster
 
-## Task 5 - Upload dataset to Databricks
+## Task 6 - Upload dataset to Databricks
 
 Databricks allows for data from various sources such as Azure Storage and [insert another storage source], but for simplicity, we will be manually uploading the data to the clusters file storage. 
 
@@ -125,18 +128,18 @@ Databricks allows for data from various sources such as Azure Storage and [inser
 2. In the menu select __Data__ in the menu and click __Create table__.
 3. Drop the file into the section _Drop files to upload, or click to browse_
 
-## Task 6 - Set up workflow for running unit tests
+## Task 7 - Set up workflow for running unit tests
 
 [TODO]
 Should give student an overview of what is failing and status quo. 
 Helpertests running ok, all tests related to dataset cleaning should be failing
 
-## Task 7 - Set up workflow for labeling PRs based on part of code
+## Task 8 - Set up workflow for labeling PRs based on part of code
 
 [TODO]
 
 
-## Task 8 - Clean dataset 
+## Task 9 - Clean dataset 
 
 We have our Airbnb data available, and we have our unit tests set up in a workflow. Let's get to cleaning the data to make it easier to work with and analyze. 
 
@@ -151,7 +154,7 @@ Simply follow the instructions in the workbook, and check back in for the next t
 
 Good luck! 
 
-## Task 9 - Create PR with the changes to the workbook
+## Task 10 - Create PR with the changes to the workbook
 
 Once you're happy with the modifications you've made to the workbook. It's time to commit the changes to the Git repository.
 We will do this through a pull request (PR) so that all our created workflows will be triggered. 
@@ -175,7 +178,7 @@ Follow the link in the dialogue to complete the pull request in GitHub.
 Are your workflows being triggered and yielding the expected results? If not, what changes can you make to the workflow to make it work? 
 
 
-## Task 10 - Linear regression on data
+## Task 11 - Linear regression on data
 
 The data is now cleaned and we can finally start analyzing it.
 
