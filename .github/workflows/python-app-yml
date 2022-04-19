@@ -4,13 +4,13 @@
 name: Python application
 
 on:
-  workflow_dispatch
+  workflow_dispatch:
   push:
-    branches: [ master ]
+    branches: [ main ]
     paths: 
       - 'data-files/**'
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
 
 permissions:
   contents: read
