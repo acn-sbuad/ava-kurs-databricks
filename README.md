@@ -74,7 +74,7 @@ Create a new branch __data-cleaning__ which derives from the __main__ branch. Le
 
     !["Navigation to token generation"](imgs/generate-new-token.jpg)
 
-2. Add `Databrocks` in Note, and select __repo__ as the scope. The token will be applicable for all the specified actions in your repositories.
+2. Add `Databricks` in Note, and select __repo__ as the scope. The token will be applicable for all the specified actions in your repositories.
 
     !["Configure token"](imgs/configure-token.jpg)
 
@@ -82,7 +82,7 @@ Create a new branch __data-cleaning__ which derives from the __main__ branch. Le
 
     !["Successfully created token page"](imgs/ready-token.jpg)
 
-4. Copy the token value to _Notepad_ or a similar text editor for safe keeping. We will be using it in a later step.
+4. Copy the token value to _Notepad_ or a similar text editor for safe keeping. We will be using it in later steps.
 
 
 ## Task 4 - Connect Databricks to GitHub repository
@@ -112,7 +112,7 @@ Create a new branch __data-cleaning__ which derives from the __main__ branch. Le
 
     Add the url for the repository and select GitHub as source. 
 
-    Click __Create__
+    Click `Create`
 
     !["Repository config"](imgs/add-repo.png)
 
@@ -126,48 +126,95 @@ To run operations in Databricks you must have a cluster in place.
 In this task, we will be setting up the cluster.
 
 1. In the menu in Databricks, select __Create__ and __Cluster__
+
 2. Set up the following configuration
     - _Cluster name_: `ava-kurs-cluster`
     - _Cluster mode_: `Single Node`
     - _Databricks runtime version_: `Runtime: 10.4 LTS`
     - _Worker type_: Compute optimized, `Standard_F4`
     
-3. Open __Advanced Options___ at the bottom of the page. In the section ___Environment variables___ add GITHUB_TOKEN=your github token that you saved in a notepad
+3. Open __Advanced Options__ at the bottom of the page. In the section ___Environment variables___ add _GITHUB_TOKEN_=`your github token` that you saved in a notepad
     
     Leave the rest of the settings to the default value.
-4. Click Create cluster
+
+4. Click `Create cluster`
 
 ## Task 6 - Upload dataset to Databricks
 
 Databricks allows for data from various sources such as Azure Storage and [insert another storage source], but for simplicity, we will be manually uploading the data to the clusters file storage. 
 
 1. Download the [Airbnb data set](listings.csv) and save it in a reasonable location
-2. In the menu select __Data__ in the menu and click __Create table__.
+
+2. In the menu select `Data` and then click `Create table`.
+
 3. Drop the file into the section _Drop files to upload, or click to browse_
 
 ## Task 7 - Set up workflow for running unit tests
 
-1. Go to the __Actions__ tab in your Github repo
-2. Search for python worfklow patterns. As you can see there is plenty different patterns you can choose from. In this scenario we're gonna go for a __Python application__. Click on the __Configure__ button
+1. Go to the __Actions__ tab in your Github portal repo
+
+2. Search for _python_ worfklow patterns. As you can see there is plenty of different patterns you can choose from. In this scenario we're gonna go for a __Python application__. Click on the `Configure` button
+
 3. Study the workflow file. Can you identify the key components?
     - Which events does the workflow listen after?
     - The runner defined, is it a self-hosted agent or a GitHub runner?
-    - Could you think of another runner that could have been used? Available runners (add link)
-4. Let's do some changes in our file. Let's start with changing the name to __PyTest__. This workflow is running unit tests that are stored in Test/data-cleansing folder. 
+    - Could you think of another runner that could have been used? [Available runners](https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners)
+
+4. Let's do some changes in our file. Let's start with changing the name to _PyTest_. This workflow is running unit tests that are stored in __Test/data-cleansing__ folder. 
+
 5. Then we will remove lines from 31 to 36. This is a linting action. We won't need it today.
-6. Attribute __on__ determines which events will trigger the workflow. As a defualt it's push and pull request actions on the main branch.
-   Please remove line 7 and 8 as we won't trigger our workflow on push to the main branch. Instead we will focus on pull-request.
-7. We can also run the workflows manually. Let's try this! Add this to your code above __pull_request__ attribute (add code snippet) 
-8. Your file should look like this (add img)
-9. Click on __Start commit__
-10. Click on the __Actions__ tab again. 
-11. Under workflows click on __Python application__ and __Run workflow__. How was the result? 
 
-It wasn't successful as all the unit tests failed. It's because the airbnb_clean.csv file is empty. We will fill it up with data later in this course. For now let's leave it like that.
-[TODO]
-Should give student an overview of what is failing and status quo. 
-Helpertests running ok, all tests related to dataset cleaning should be failing
+6. Attribute __on__ determines which events will trigger the workflow. As a defualt it's _push_ and _pull-request_ actions on the _main_ branch.
+   Please remove line 7 and 8 as we won't trigger our workflow on _push_ to the _main_ branch. Instead we will focus on _pull-request_.
 
+7. We can also run the workflows manually. Let's try this! Add this to your code above the _pull_request_ attribute
+```yml
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: [ main ]
+```
+
+8. Your file should look like this 
+```yml
+name: PyTest
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: [ main ]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python 3.10
+      uses: actions/setup-python@v3
+      with:
+        python-version: "3.10"
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install flake8 pytest
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+    - name: Test with pytest
+      run: |
+        pytest
+```
+
+9. Click on `Start commit`
+
+10. Click on the `Actions` tab again. 
+
+11. Under workflows click on `Python application` and `Run workflow`. How was the result? 
+
+It wasn't successful as all the unit tests failed. It's because the __airbnb_clean.csv__ file is empty. We will fill it up with data later in this course. For now let's leave it like that.
 
 ## Task 8 - Automating developer workflows
 
@@ -265,7 +312,7 @@ Find the correct action to insert from [Github Marketplace for Actions](https://
 
 ### Step 5 - Create a PR to test the new workflow
 
-Now let's switch to __data-cleaning__ branch.
+Now let's switch to `data-cleaning` branch.
 
 Navigate to `Test/data-cleansing/airbnb_test.py`.
 
