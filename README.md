@@ -70,15 +70,15 @@ Create a new branch __data-cleaning__ which derives from the __main__ branch. Le
 
 ## Task 3 - Generate a personal access token for GitHub
 
-1. In GitHub, navigate to your __Git account settings__, then __Developer Settings__. Click the __Personal access tokens__ menu, then click __Generate new token__.
+1. In GitHub, navigate to your __Git account settings__, then __Developer Settings__. Click the `Personal access tokens` menu, then click `Generate new token`.
 
     !["Navigation to token generation"](imgs/generate-new-token.jpg)
 
-2. Add `Databricks` in Note, and select __repo__ as the scope. The token will be applicable for all the specified actions in your repositories.
+2. Write _Databricks_ in __Note__, and select `repo` as the scope. The token will be applicable for all the specified actions in your repositories.
 
     !["Configure token"](imgs/configure-token.jpg)
 
-3. Click Generate Token.
+3. Click `Generate Token`.
 
     !["Successfully created token page"](imgs/ready-token.jpg)
 
@@ -272,7 +272,7 @@ each label.
 
 ### Step 2 - Set up a workflow for automatic labeling on PR
 
-In the `.github/workflows` folder create a new file and name it ``pr-labeler.yml`.
+In the `.github/workflows` folder create a new file and name it `pr-labeler.yml`.
 Copy the code below into the file.
 
 ```
