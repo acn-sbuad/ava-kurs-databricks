@@ -147,12 +147,23 @@ Databricks allows for data from various sources such as Azure Storage and [inser
 
 ## Task 7 - Set up workflow for running unit tests
 
-1. Go to __Actions__ tab in your Github repo
-2. Click on the __New workflow__ button
-3. Search for python worfklow patterns and on __Python application__ card click __Configure__
-4. Remove line from 31 to 36 as we won't need linting in this workshop
-5. Click on __Start commit__
-6. Click on __Actions__ tab again and see the result of your workflow run. 
+1. Go to the __Actions__ tab in your Github repo
+2. Search for python worfklow patterns. As you can see there is plenty different patterns you can choose from. In this scenario we're gonna go for a __Python application__. Click on the __Configure__ button
+3. Study the workflow file. Can you identify the key components?
+    - Which events does the workflow listen after?
+    - The runner defined, is it a self-hosted agent or a GitHub runner?
+    - Could you think of another runner that could have been used? Available runners (add link)
+4. Let's do some changes in our file. Let's start with changing the name to __PyTest__. This workflow is running unit tests that are stored in Test/data-cleansing folder. 
+5. Then we will remove lines from 31 to 36. This is a linting action. We won't need it today.
+6. Attribute __on__ determines which events will trigger the workflow. As a defualt it's push and pull request actions on the main branch.
+   Please remove line 7 and 8 as we won't trigger our workflow on push to the main branch. Instead we will focus on pull-request.
+7. We can also run the workflows manually. Let's try this! Add this to your code above __pull_request__ attribute (add code snippet) 
+8. Your file should look like this (add img)
+9. Click on __Start commit__
+10. Click on the __Actions__ tab again. 
+11. Under workflows click on __Python application__ and __Run workflow__. How was the result? 
+
+It wasn't successful as all the unit tests failed. It's because the airbnb_clean.csv file is empty. We will fill it up with data later in this course. For now let's leave it like that.
 [TODO]
 Should give student an overview of what is failing and status quo. 
 Helpertests running ok, all tests related to dataset cleaning should be failing
@@ -184,7 +195,7 @@ We will be setting up a workflow to automatically label pull requests based on t
 ### Step 1 - Define the labels for the workflow to use
 
 A prerequisite for the action we are using is a file that defines the labels and the files in the repository that each label applies to.
-
+Make sure you are still on the __main__ branch.
 Create an empty file called `labeler.yml` in the `.github` folder
 and copy the content below.
 
@@ -254,7 +265,9 @@ Find the correct action to insert from [Github Marketplace for Actions](https://
 
 ### Step 5 - Create a PR to test the new workflow
 
-In GitHub, navigate to `Test/data-cleansing/airbnb_test.py`.
+Now let's switch to __data-cleaning__ branch.
+
+Navigate to `Test/data-cleansing/airbnb_test.py`.
 
 Enable editing of the file by clicking the pencil icon
 
@@ -267,7 +280,7 @@ option and complete the pull request creation.
 
   ![Create PR in GitHub](imgs/create-pr.PNG)
 
-Once the PR is create, follow the workflow run from the `Actions` tab in GitHub, and confirm that the PR is successfully labeled.
+Once the PR is create, follow the workflow run from the `Actions` tab in GitHub, and confirm that the PR is successfully labeled (Check the Pull Request Labeler workflow as the PyTest workflow will still fail).
 
   ![Successfully labeled pull request](imgs/labeled-pr.png)
 
