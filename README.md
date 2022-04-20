@@ -144,7 +144,7 @@ In this task, we will be setting up the cluster.
 
 Databricks allows for data from various sources such as Azure Storage and [insert another storage source], but for simplicity, we will be manually uploading the data to the clusters file storage. 
 
-1. Download the [Airbnb data set](listings.csv) and save it in a reasonable location
+1. Download the [Airbnb data set](listings.csv) and save it in a reasonable location. When the raw file is opened in a new browser window just right-click the page and click on `Save as`.
 
 2. In the menu select `Data` and then click `Create table`.
 
