@@ -275,12 +275,11 @@ Enable editing of the file by clicking the pencil icon
 
 Add a line break to one of the lines in the file e.g. after a comment. 
 
-Make sure to give the change a descriptive name, select the `create a new branch`
-option and complete the pull request creation.
+Make sure to give the change a descriptive name. Click on __Commit changes__
 
   ![Create PR in GitHub](imgs/create-pr.PNG)
 
-Once the PR is create, follow the workflow run from the `Actions` tab in GitHub, and confirm that the PR is successfully labeled (Check the Pull Request Labeler workflow as the PyTest workflow will still fail).
+Once the PR is create, follow the workflow run from the `Actions` tab in GitHub, and confirm that the PR is successfully labeled (Check the Pull Request Labeler workflow as the PyTest workflow will fail).
 
   ![Successfully labeled pull request](imgs/labeled-pr.png)
 
