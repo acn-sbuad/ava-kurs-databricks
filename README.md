@@ -119,12 +119,6 @@ Create a new branch __data-cleaning__ which derives from the __main__ branch. Le
     You should see the files from the GitHub repository when you drill into the __Repos__ section.
 
     !["Repository overview in Databricks"](imgs/successfully-added-repo.png)
-
-9. Now let's switch to the `data-cleaning` branch by clicking on the `main` button 
-   
-   !["Repository switch branch"](imgs/databricks-switch-repo.png)
-   
-   !["Repository switch branch 2"](imgs/databricks-switch-repo2.png)
    
 
 ## Task 5 - Create a cluster
@@ -176,7 +170,7 @@ Databricks allows for data from various sources such as Azure Storage and [inser
 6. Attribute __on__ determines which events will trigger the workflow. As a defualt it's _push_ and _pull-request_ actions on the _main_ branch.
    Please remove line 7 and 8 as we won't trigger our workflow on _push_ to the _main_ branch. Instead we will focus on _pull-request_.
 
-7. We can also run the workflows manually. Let's try this! Add this to your code above the _pull_request_ attribute
+7. We can also run the workflows manually. Let's try this! Add `workflow_dispatch:` to your code above the _pull_request_ attribute
 ```yml
 on:
   workflow_dispatch:
@@ -217,13 +211,13 @@ jobs:
         pytest
 ```
 
-9. Click on `Start commit`
+9. Commit your changes. Click on `Start commit`
 
 10. Click on the `Actions` tab again. 
 
-11. Under workflows click on `Python application` and `Run workflow`. How was the result? 
+11. Under workflows click on `PyTest` and `Run workflow`. How was the result? 
 
-It wasn't successful as all the unit tests failed. It's because the __airbnb_clean.csv__ file is empty. We will fill it up with data later in this course. For now let's leave it like that.
+Well as you can see it wasn't successful as all the unit tests failed. It's because the __airbnb_clean.csv__ file is empty. We will fill it up with data later in this course. For now let's leave it like that.
 
 ## Task 8 - Automating developer workflows
 
@@ -347,6 +341,7 @@ You will find the task description integrated in the workbook.
 
 In Databricks, navigate to _Repos_, select the _AirBnB_ folder, 
 select the _data-cleansing_ folder and finally the `Data Cleansing Lab` workbook. 
+(Make sure you are on a `data-cleaning` branch.
 
 !["Screenshot of the data cleaning workbook"](imgs/cleansing-workbook.png)
 
@@ -364,14 +359,14 @@ In Databricks, click !["Main button"](imgs/main-btn.png) in the top menu.
 A dialogue window highlighting all your changes should appear. 
 !["Workbook changes"](imgs/branch-management.png)
 
-In order to create a PR we must commit the changes to a different branch. 
+In order to create a PR we must commit the changes to the `data-cleaning` branch. Let's switch to it. 
 
-!["New branch"](imgs/new-branch.png)
-In the box marked with red, type the name of your branch, and click `Create Branch:`.
+!["Change branch"](imgs/databricks-switch-repo.png)
 
-!["Branch ready to be pushed"](imgs/commit-and-push-branch.png)
+!["Change branch 2"](imgs/databricks-switch-repo2.png)
 
-Add a summary of the changes and click _Commit & Push_
+
+Add a summary of the changes and click `Commit & Push`
 
 Follow the link in the dialogue to complete the pull request in GitHub.
 
