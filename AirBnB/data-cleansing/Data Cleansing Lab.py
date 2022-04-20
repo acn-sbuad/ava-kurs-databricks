@@ -381,3 +381,31 @@ print("Tests passed.")
 columnOrder = ['host_total_listings_count', 'neighbourhood_cleansed', 'property_type', 'room_type', 'accommodates', 'bedrooms', 'beds', 'minimum_nights', 'number_of_reviews', 'review_scores_rating', 'review_scores_accuracy', 'review_scores_cleanliness', 'review_scores_checkin', 'review_scores_communication', 'review_scores_location', 'review_scores_value', 'longitude', 'latitude', 'price', 'host_is_superhost', 'instant_bookable']
 
 cleanDF.select(columnOrder).write.mode("overwrite").format("delta").saveAsTable("AirbnbOslo")
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC Create a csv file based on the refactored data, and then push it to github
+
+# COMMAND ----------
+
+from github import Github
+import os
+#save data frame to pandas data frame so we can use the file further in the code, and send it via github api to our repo
+#unfortunately as for now it's not possible to save the data refactored through the notebooks directly to the repos in databricks portal (you would have to download the file to your local machine and then upload it in the repos folder)
+file = cleanDF.toPandas().to_csv(sep=',', index=False)
+
+#get access to your github account and repo
+token = os.getenv("GITHUB_TOKEN")
+g = Github(token)
+repo = g.get_user().get_repo("ava-kurs-databricks")
+
+#if airbnb_clean.csv exists we only update it, otherwise the new file is created
+try:
+  contents = repo.get_contents("Test/data-cleansing/data-files/airbnb_clean.csv")
+  repo.update_file(contents.path, "init commit", file, contents.sha, branch="data-cleaning")
+except Exception as e :
+  if e.args[0] == 404:
+    repo.create_file("data-files/myData.csv", "init commit create", file, branch="data-cleaning")
+  else:
+    print(e)
