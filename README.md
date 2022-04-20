@@ -291,7 +291,7 @@ jobs:
     - name: Labeler
       uses: [insert correct action]
       with:
-        repo-token: ${{ "{{ secrets.GITHUB_TOKEN " }}}}
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
 ```
 
 This defines an action that triggers on the event of a pull requests. 
