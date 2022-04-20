@@ -428,12 +428,12 @@ token = os.getenv("GITHUB_TOKEN")
 g = Github(token)
 repo = g.get_user().get_repo("ava-kurs-databricks")
 
-#if airbnb_clean.csv exists we only update it, otherwise the new file is created
+#if airbnb.csv exists we only update it, otherwise the new file is created
 try:
-  contents = repo.get_contents("Test/data-cleansing/data-files/airbnb_clean.csv")
-  repo.update_file(contents.path, "init commit", file, contents.sha, branch="data-cleaning")
+  contents = repo.get_contents("Test/data-cleansing/data-files/airbnb.csv")
+  repo.update_file(contents.path, "updated airbnb.csv", file, contents.sha, branch="data-cleaning")
 except Exception as e :
   if e.args[0] == 404:
-    repo.create_file("data-files/myData.csv", "init commit create", file, branch="data-cleaning")
+    repo.create_file("Test/data-cleansing/data-files/airbnb.csv", "created airbnb.csv", file, branch="data-cleaning")
   else:
     print(e)
