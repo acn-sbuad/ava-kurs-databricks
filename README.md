@@ -161,6 +161,7 @@ Databricks allows for data from various sources such as Azure Storage and [inser
 1. Go to the __Actions__ tab in your Github portal repo
 
 2. Search for _python_ worfklow patterns. As you can see there is plenty of different patterns you can choose from. In this scenario we're gonna go for a __Python application__. Click on the `Configure` button
+ 
  !["Python action card"](imgs/python-action-card.png)
 
 3. Study the workflow file. Can you identify the key components?
