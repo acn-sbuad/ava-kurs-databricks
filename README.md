@@ -63,7 +63,9 @@ Let's move on to the next task, and get back to this once it's ready.
 
 We will be working with a repository that contains two Databricks workbooks and unit tests both for the notebooks and dataset. 
 
-In GitHub, fork [the repository](https://github.com/acn-sbuad/ava-kurs-databricks) to your personal GitHub account, and let's get started! 
+In GitHub, fork [the repository](https://github.com/acn-sbuad/ava-kurs-databricks) to your personal GitHub account.
+
+Create a new branch __data-cleaning__ which derives from the __main__ branch. Let's get started! 
 
 
 ## Task 3 - Generate a personal access token for GitHub
@@ -145,6 +147,12 @@ Databricks allows for data from various sources such as Azure Storage and [inser
 
 ## Task 7 - Set up workflow for running unit tests
 
+1. Go to __Actions__ tab in your Github repo
+2. Click on the __New workflow__ button
+3. Search for python worfklow patterns and on __Python application__ card click __Configure__
+4. Remove line from 31 to 36 as we won't need linting in this workshop
+5. Click on __Start commit__
+6. Click on __Actions__ tab again and see the result of your workflow run. 
 [TODO]
 Should give student an overview of what is failing and status quo. 
 Helpertests running ok, all tests related to dataset cleaning should be failing
