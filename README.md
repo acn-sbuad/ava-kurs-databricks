@@ -334,6 +334,19 @@ Once the PR is create, follow the workflow run from the `Actions` tab in GitHub,
   ![Successfully labeled pull request](imgs/labeled-pr.png)
 
 ## Task 9 - Clean dataset 
+Let's stark with adding pygithub library to run github api directly from the notebooks 
+
+1. In the Databricks workspace find and click `Compute` link.
+ 
+ !["Compute link"](imgs/compute-icon.png)
+
+2. Click on the name of your cluster and then find `Libraries` tab. Click on it. 
+
+3. Click `Install new` and when the window appears, choose PyPi and write _pygithub_ in the __Package__ field.
+
+4. Click `Install` and we are all set up.  
+ 
+ !["Install package"](imgs/pygtihub-install.png)  
 
 We have our Airbnb data available, and we have our unit tests set up in a workflow. Let's get to cleaning the data to make it easier to work with and analyze. 
 
@@ -341,7 +354,6 @@ You will find the task description integrated in the workbook.
 
 In Databricks, navigate to _Repos_, select the _AirBnB_ folder, 
 select the _data-cleansing_ folder and finally the `Data Cleansing Lab` workbook. 
-(Make sure you are on a `data-cleaning` branch.
 
 !["Screenshot of the data cleaning workbook"](imgs/cleansing-workbook.png)
 
