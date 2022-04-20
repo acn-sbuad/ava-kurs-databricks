@@ -392,20 +392,21 @@ cleanDF.select(columnOrder).write.mode("overwrite").format("delta").saveAsTable(
 from github import Github
 import os
 #save data frame to pandas data frame so we can use the file further in the code, and send it via github api to our repo
-#unfortunately as for now it's not possible to save the data refactored through the notebooks directly to the repos in databricks portal (you would have to download the file to your local machine and then upload it in the repos folder)
+#unfortunately as of now it's not possible to save the data cleaned through the notebooks directly to the repos in databricks portal (you would have to download the file to your local machine and then upload it to the repos folder manually)
+#that's why we will use github api in this example
 file = cleanDF.toPandas().to_csv(sep=',', index=False)
 
-#get access to your github account and repo
+#get access to your github account and repo. GITHUB_TOKEN is the cluster's environment variable that we saved before
 token = os.getenv("GITHUB_TOKEN")
 g = Github(token)
 repo = g.get_user().get_repo("ava-kurs-databricks")
 
-#if airbnb_clean.csv exists we only update it, otherwise the new file is created
+#if airbnb.csv exists we only update it, otherwise the new file is created
 try:
-  contents = repo.get_contents("Test/data-cleansing/data-files/airbnb_clean.csv")
-  repo.update_file(contents.path, "init commit", file, contents.sha, branch="data-cleaning")
+  contents = repo.get_contents("Test/data-cleansing/data-files/airbnb.csv")
+  repo.update_file(contents.path, "updated airbnb.csv", file, contents.sha, branch="data-cleaning")
 except Exception as e :
   if e.args[0] == 404:
-    repo.create_file("data-files/myData.csv", "init commit create", file, branch="data-cleaning")
+    repo.create_file("Test/data-cleansing/data-files/airbnb.csv", "created airbnb.csv", file, branch="data-cleaning")
   else:
     print(e)
