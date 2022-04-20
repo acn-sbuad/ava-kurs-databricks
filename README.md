@@ -121,7 +121,9 @@ Create a new branch __data-cleaning__ which derives from the __main__ branch. Le
     !["Repository overview in Databricks"](imgs/successfully-added-repo.png)
 
 9. Now let's switch to the `data-cleaning` branch by clicking on the `main` button 
+   
    !["Repository switch branch"](imgs/databricks-switch-repo.png)
+   
    !["Repository switch branch 2"](imgs/databricks-switch-repo2.png)
    
 
