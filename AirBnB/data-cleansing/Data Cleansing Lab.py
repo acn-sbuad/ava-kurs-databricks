@@ -126,10 +126,15 @@ display(baseDF.select("price"))
 # COMMAND ----------
 
 # TODO: Replace <FILL_IN> with appropriate code
+# TODO: Replace <FILL_IN> with appropriate code
+
+# fixedPriceDF = (baseDF
+#                 .<FILL_IN>
+#                )
 
 fixedPriceDF = (baseDF
-                .<FILL_IN>
-               )
+                .withColumnRenamed("price", "price_raw")
+                .withColumn("price", convert_price_udf(col("price_raw")).cast("Decimal(10,2)")))
 
 # COMMAND ----------
 
@@ -159,7 +164,7 @@ print("Tests passed.")
 # COMMAND ----------
 
 # TODO: Get rid of price_raw column
-fixedPriceDF = fixedPriceDF.<FILL_IN>
+fixedPriceDF = fixedPriceDF.drop("price_raw")
 
 # COMMAND ----------
 
@@ -173,9 +178,25 @@ fixedPriceDF = fixedPriceDF.<FILL_IN>
 
 # TODO: Replace <FILL_IN> with appropriate code
 
+# changedBooleanDF = (fixedPriceDF
+#                 .<FILL_IN>
+#                )
+
 changedBooleanDF = (fixedPriceDF
-                    .<FILL_IN>
+                    .withColumnRenamed("host_is_superhost", "host_is_superhost_raw")
+                    .withColumnRenamed("instant_bookable", "instant_bookable_raw")
+                    .withColumn("host_is_superhost",
+                                when(col("host_is_superhost_raw") == "f", False)
+                                .otherwise(True)
+                               )
+                    .withColumn("instant_bookable",
+                                when(col("instant_bookable_raw") == "f", False)
+                                .otherwise(True)
+                               )
                    )
+
+#Make sure to remove original columns if you have any
+changedBooleanDF = changedBooleanDF.drop("host_is_superhost_raw", "instant_bookable_raw")
 
 # COMMAND ----------
 
@@ -269,8 +290,8 @@ print("Tests passed.")
 
 # COMMAND ----------
 
-# TODO: Replace <FILL_IN> with appropriate code
-display(imputedDF.<FILL_IN>)
+# ANSWER
+display(imputedDF.select("price").describe())
 
 # COMMAND ----------
 
@@ -282,7 +303,10 @@ display(imputedDF.<FILL_IN>)
 
 # TODO: Replace <FILL_IN> with appropriate code
 
-imputedDF.<FILL_IN>
+#imputedDF.<FILL_IN>
+
+# ANSWER
+imputedDF.filter(col("price") == 0).count()
 
 # COMMAND ----------
 
@@ -303,7 +327,9 @@ display(imputedDF.select("price").where("price < 2500"))
 
 # TODO: Replace <FILL_IN> with appropriate code
 
-posPricesDF = <FILL_IN>
+# posPricesDF = <FILL_IN>
+
+posPricesDF = imputedDF.filter("price between 1 and 2100")
 
 # COMMAND ----------
 
@@ -350,7 +376,9 @@ display(posPricesDF.groupBy("minimum_nights").count().orderBy(col("minimum_night
 # COMMAND ----------
 
 # TODO: Replace <FILL_IN> with appropriate code
-cleanDF = posPricesDF.<FILL_IN>
+#cleanDF = posPricesDF.<FILL_IN>
+
+cleanDF = posPricesDF.filter(col("minimum_nights") <= 30)
 
 # COMMAND ----------
 
@@ -381,3 +409,33 @@ print("Tests passed.")
 columnOrder = ['host_total_listings_count', 'neighbourhood_cleansed', 'property_type', 'room_type', 'accommodates', 'bedrooms', 'beds', 'minimum_nights', 'number_of_reviews', 'review_scores_rating', 'review_scores_accuracy', 'review_scores_cleanliness', 'review_scores_checkin', 'review_scores_communication', 'review_scores_location', 'review_scores_value', 'longitude', 'latitude', 'price', 'host_is_superhost', 'instant_bookable']
 
 cleanDF.select(columnOrder).write.mode("overwrite").format("delta").saveAsTable("AirbnbOslo")
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC Create a csv file based on the refactored data, and then push it to github
+
+# COMMAND ----------
+
+from github import Github
+import os
+#save data frame to pandas data frame so we can use the file further in the code, and send it via github api to our repo
+#unfortunately as for now it's not possible to save the data refactored through the notebooks directly to the repos in databricks portal (you would have to download the file to your local machine and then upload it in the repos folder)
+file = cleanDF.toPandas().to_csv(sep=',', index=False)
+
+#get access to your github account and repo
+token = os.getenv("GITHUB_TOKEN")
+g = Github(token)
+repo = g.get_user().get_repo("ava-kurs-databricks")
+
+#if airbnb.csv exists we only update it, otherwise the new file is created
+try:
+  contents = repo.get_contents("Test/data-cleansing/data-files/airbnb.csv")
+  repo.update_file(contents.path, "updated airbnb.csv", file, contents.sha, branch="data-cleaning")
+  print("File updated")
+except Exception as e :
+  if e.args[0] == 404:
+    repo.create_file("Test/data-cleansing/data-files/airbnb.csv", "created airbnb.csv", file, branch="data-cleaning")
+    print("File created")   
+  else:
+    print(e)
