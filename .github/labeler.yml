@@ -1,0 +1,9 @@
+area/test:
+  - 'Test/**/*'
+  - 'Test/**/**/*'
+
+area/automation:
+  - '.github/**/*'
+
+area/development:
+  - 'AirBnB/**/*'
