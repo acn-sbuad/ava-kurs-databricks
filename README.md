@@ -63,24 +63,26 @@ Let's move on to the next task, and get back to this once it's ready.
 
 We will be working with a repository that contains two Databricks workbooks and unit tests both for the notebooks and dataset. 
 
-In GitHub, fork [the repository](https://github.com/acn-sbuad/ava-kurs-databricks) to your personal GitHub account, and let's get started! 
+In GitHub, fork [the repository](https://github.com/acn-sbuad/ava-kurs-databricks) to your personal GitHub account.
+
+Create a new branch __data-cleaning__ which derives from the __main__ branch. Let's get started! 
 
 
 ## Task 3 - Generate a personal access token for GitHub
 
-1. In GitHub, navigate to your __Git account settings__, then __Developer Settings__. Click the __Personal access tokens__ menu, then click __Generate new token__.
+1. In GitHub, navigate to your __Git account settings__, then __Developer Settings__. Click the `Personal access tokens` menu, then click `Generate new token`.
 
     !["Navigation to token generation"](imgs/generate-new-token.jpg)
 
-2. Add `Databrocks` in Note, and select __repo__ as the scope. The token will be applicable for all the specified actions in your repositories.
+2. Write _Databricks_ in __Note__, and select `repo` as the scope. The token will be applicable for all the specified actions in your repositories.
 
     !["Configure token"](imgs/configure-token.jpg)
 
-3. Click Generate Token.
+3. Click `Generate Token`.
 
     !["Successfully created token page"](imgs/ready-token.jpg)
 
-4. Copy the token value to _Notepad_ or a similar text editor for safe keeping. We will be using it in a later step.
+4. Copy the token value to _Notepad_ or a similar text editor for safe keeping. We will be using it in later steps.
 
 
 ## Task 4 - Connect Databricks to GitHub repository
@@ -110,13 +112,14 @@ In GitHub, fork [the repository](https://github.com/acn-sbuad/ava-kurs-databrick
 
     Add the url for the repository and select GitHub as source. 
 
-    Click __Create__
+    Click `Create`
 
     !["Repository config"](imgs/add-repo.png)
 
     You should see the files from the GitHub repository when you drill into the __Repos__ section.
 
     !["Repository overview in Databricks"](imgs/successfully-added-repo.png)
+   
 
 ## Task 5 - Create a cluster
 
@@ -124,31 +127,97 @@ To run operations in Databricks you must have a cluster in place.
 In this task, we will be setting up the cluster.
 
 1. In the menu in Databricks, select __Create__ and __Cluster__
+
 2. Set up the following configuration
     - _Cluster name_: `ava-kurs-cluster`
     - _Cluster mode_: `Single Node`
     - _Databricks runtime version_: `Runtime: 10.4 LTS`
     - _Worker type_: Compute optimized, `Standard_F4`
     
-3. Open __Advanced Options___ at the bottom of the page. In the section ___Environment variables___ add GITHUB_TOKEN=your github token that you saved in a notepad
+3. Open __Advanced Options__ at the bottom of the page. In the section ___Environment variables___ add _GITHUB_TOKEN_=`your github token` that you saved in a notepad
     
     Leave the rest of the settings to the default value.
-4. Click Create cluster
+
+4. Click `Create cluster`
 
 ## Task 6 - Upload dataset to Databricks
 
 Databricks allows for data from various sources such as Azure Storage and [insert another storage source], but for simplicity, we will be manually uploading the data to the clusters file storage. 
 
-1. Download the [Airbnb data set](listings.csv) and save it in a reasonable location
-2. In the menu select __Data__ in the menu and click __Create table__.
+1. Download the [Airbnb data set](listings.csv) and save it in a reasonable location. If the raw file is opened in a new browser window (instead of downloading) just right-click the page and click on `Save as`.
+
+2. In the menu select `Data` and then click `Create table`.
+
 3. Drop the file into the section _Drop files to upload, or click to browse_
 
 ## Task 7 - Set up workflow for running unit tests
 
-[TODO]
-Should give student an overview of what is failing and status quo. 
-Helpertests running ok, all tests related to dataset cleaning should be failing
+1. Go to the __Actions__ tab in your Github portal repo
 
+2. Search for _python_ worfklow patterns. As you can see there are plenty of different patterns you can choose from. In this scenario we're gonna go for a __Python application__. Click on the `Configure` button
+ 
+ !["Python action card"](imgs/python-action-card.png)
+
+3. Study the workflow file. Can you identify the key components?
+    - Which events does the workflow listen after?
+    - The runner defined, is it a self-hosted agent or a GitHub runner?
+    - Could you think of another runner that could have been used? [Available runners](https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners)
+
+4. Let's do some changes in our file. Let's start with changing the name to _PyTest_. This workflow will be running unit tests that are stored in __Test/data-cleansing__ folder. 
+
+5. Then we will remove lines from 31 to 36. This is a linting action. We won't need it today.
+
+6. Attribute __on__ determines which events will trigger the workflow. As a defualt it's _push_ and _pull-request_ actions on the _main_ branch.
+   Please remove line 7 and 8 as we won't trigger our workflow on _push_ to the _main_ branch. Instead we will focus on _pull-request_.
+
+7. We can also run the workflows manually. Let's try this! Add `workflow_dispatch:` to your code above the _pull_request_ attribute
+```yml
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: [ main ]
+```
+
+8. Your file should look like this 
+```yml
+name: PyTest
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: [ main ]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python 3.10
+      uses: actions/setup-python@v3
+      with:
+        python-version: "3.10"
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install flake8 pytest
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+    - name: Test with pytest
+      run: |
+        pytest
+```
+
+9. Commit your changes. Click on `Start commit`
+
+10. Click on the `Actions` tab again. 
+
+11. Under workflows click on `PyTest` and `Run workflow`. How was the result? 
+
+Well as you can see it wasn't successful as all the unit tests failed. It's because the __airbnb.csv__ file is empty. We will fill it up with data later in this course. For now let's leave it like that.
 
 ## Task 8 - Automating developer workflows
 
@@ -176,7 +245,7 @@ We will be setting up a workflow to automatically label pull requests based on t
 ### Step 1 - Define the labels for the workflow to use
 
 A prerequisite for the action we are using is a file that defines the labels and the files in the repository that each label applies to.
-
+Make sure you are still on the __main__ branch.
 Create an empty file called `labeler.yml` in the `.github` folder
 and copy the content below.
 
@@ -206,10 +275,10 @@ each label.
 
 ### Step 2 - Set up a workflow for automatic labeling on PR
 
-In the `.github/workflows` folder create a new file and name it ``pr-labeler.yml`.
+In the `.github/workflows` folder create a new file and name it `pr-labeler.yml`.
 Copy the code below into the file.
 
-```
+```yml
 name: Pull Request Labeler
 on: [pull_request_target]
 
@@ -222,7 +291,7 @@ jobs:
     - name: Labeler
       uses: [insert correct action]
       with:
-        repo-token: ${{ "{{ secrets.GITHUB_TOKEN " }}}}
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
 ```
 
 This defines an action that triggers on the event of a pull requests. 
@@ -246,7 +315,9 @@ Find the correct action to insert from [Github Marketplace for Actions](https://
 
 ### Step 5 - Create a PR to test the new workflow
 
-In GitHub, navigate to `Test/data-cleansing/airbnb_test.py`.
+Now let's switch to `data-cleaning` branch.
+
+Navigate to `Test/data-cleansing/airbnb_test.py`.
 
 Enable editing of the file by clicking the pencil icon
 
@@ -254,16 +325,28 @@ Enable editing of the file by clicking the pencil icon
 
 Add a line break to one of the lines in the file e.g. after a comment. 
 
-Make sure to give the change a descriptive name, select the `create a new branch`
-option and complete the pull request creation.
+Make sure to give the change a descriptive name. Click on __Commit changes__
 
   ![Create PR in GitHub](imgs/create-pr.PNG)
 
-Once the PR is create, follow the workflow run from the `Actions` tab in GitHub, and confirm that the PR is successfully labeled.
+Once the PR is create, follow the workflow run from the `Actions` tab in GitHub, and confirm that the PR is successfully labeled (Check the Pull Request Labeler workflow as the PyTest workflow will fail).
 
   ![Successfully labeled pull request](imgs/labeled-pr.png)
 
 ## Task 9 - Clean dataset 
+Let's stark with adding pygithub library to run github api directly from the notebooks 
+
+1. In the Databricks workspace find and click `Compute` link.
+ 
+ !["Compute link"](imgs/compute-icon.png)
+
+2. Click on the name of your cluster and then find `Libraries` tab. Click on it. 
+
+3. Click `Install new` and when the window appears, choose PyPi and write _pygithub_ in the __Package__ field.
+
+4. Click `Install` and we are all set up.  
+ 
+ !["Install package"](imgs/pygtihub-install.png)  
 
 We have our Airbnb data available, and we have our unit tests set up in a workflow. Let's get to cleaning the data to make it easier to work with and analyze. 
 
@@ -288,14 +371,14 @@ In Databricks, click !["Main button"](imgs/main-btn.png) in the top menu.
 A dialogue window highlighting all your changes should appear. 
 !["Workbook changes"](imgs/branch-management.png)
 
-In order to create a PR we must commit the changes to a different branch. 
+In order to create a PR we must commit the changes to the `data-cleaning` branch. Let's switch to it. 
 
-!["New branch"](imgs/new-branch.png)
-In the box marked with red, type the name of your branch, and click `Create Branch:`.
+!["Change branch"](imgs/databricks-switch-repo.png)
 
-!["Branch ready to be pushed"](imgs/commit-and-push-branch.png)
+!["Change branch 2"](imgs/databricks-switch-repo2.png)
 
-Add a summary of the changes and click _Commit & Push_
+
+Add a summary of the changes and click `Commit & Push`
 
 Follow the link in the dialogue to complete the pull request in GitHub.
 
