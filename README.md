@@ -154,7 +154,7 @@ Databricks allows for data from various sources such as Azure Storage and [inser
 
 1. Go to the __Actions__ tab in your Github portal repo
 
-2. Search for _python_ worfklow patterns. As you can see there is plenty of different patterns you can choose from. In this scenario we're gonna go for a __Python application__. Click on the `Configure` button
+2. Search for _python_ worfklow patterns. As you can see there are plenty of different patterns you can choose from. In this scenario we're gonna go for a __Python application__. Click on the `Configure` button
  
  !["Python action card"](imgs/python-action-card.png)
 
@@ -163,7 +163,7 @@ Databricks allows for data from various sources such as Azure Storage and [inser
     - The runner defined, is it a self-hosted agent or a GitHub runner?
     - Could you think of another runner that could have been used? [Available runners](https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners)
 
-4. Let's do some changes in our file. Let's start with changing the name to _PyTest_. This workflow is running unit tests that are stored in __Test/data-cleansing__ folder. 
+4. Let's do some changes in our file. Let's start with changing the name to _PyTest_. This workflow will be running unit tests that are stored in __Test/data-cleansing__ folder. 
 
 5. Then we will remove lines from 31 to 36. This is a linting action. We won't need it today.
 
@@ -217,7 +217,7 @@ jobs:
 
 11. Under workflows click on `PyTest` and `Run workflow`. How was the result? 
 
-Well as you can see it wasn't successful as all the unit tests failed. It's because the __airbnb_clean.csv__ file is empty. We will fill it up with data later in this course. For now let's leave it like that.
+Well as you can see it wasn't successful as all the unit tests failed. It's because the __airbnb.csv__ file is empty. We will fill it up with data later in this course. For now let's leave it like that.
 
 ## Task 8 - Automating developer workflows
 
@@ -278,7 +278,7 @@ each label.
 In the `.github/workflows` folder create a new file and name it `pr-labeler.yml`.
 Copy the code below into the file.
 
-```
+```yml
 name: Pull Request Labeler
 on: [pull_request_target]
 
