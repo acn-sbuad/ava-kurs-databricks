@@ -24,7 +24,7 @@ convert_price_udf = udf(lambda z: convert_price_to_clean(z), StringType())
 # COMMAND ----------
 
 # Read the data from CSV-file
-filePath = "/FileStore/tables/listings_csv.gz"
+filePath = "/FileStore/tables/listings.csv"
 rawDF = (spark
          .read
          .option("header", "true")
