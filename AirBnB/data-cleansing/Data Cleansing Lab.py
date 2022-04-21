@@ -432,8 +432,10 @@ repo = g.get_user().get_repo("ava-kurs-databricks")
 try:
   contents = repo.get_contents("Test/data-cleansing/data-files/airbnb.csv")
   repo.update_file(contents.path, "updated airbnb.csv", file, contents.sha, branch="data-cleaning")
+  print("File updated")
 except Exception as e :
   if e.args[0] == 404:
     repo.create_file("Test/data-cleansing/data-files/airbnb.csv", "created airbnb.csv", file, branch="data-cleaning")
+    print("File created")   
   else:
     print(e)
