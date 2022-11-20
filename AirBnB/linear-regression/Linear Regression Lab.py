@@ -19,6 +19,7 @@
 
 # COMMAND ----------
 
+#change text
 airbnbDF = spark.read.table("AirbnbOslo")
 
 # COMMAND ----------
